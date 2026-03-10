@@ -4,60 +4,78 @@ import { FaReact, FaRocket, FaHeart, FaCode } from 'react-icons/fa'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-const magazines = [
-  {id: 1, title: 'architectural digest', image: 'https://upload.wikimedia.org/wikipedia/en/4/4b/Architectural_Digest_Magazine_Cover.jpg', theme: 'architecture', isAvailable: true},
-  {id: 2, title: 'vogue', image: 'https://upload.wikimedia.org/wikipedia/en/9/9c/Vogue_Magazine_Cover.jpg', theme: 'fashion', isAvailable: true},
-  {id: 3, title: 'communication arts', image: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Communication_Arts_Magazine_Cover.jpg', theme: 'design', isAvailable: false},
+const recentMovies = [
+  {id: 1, title: 'The Grey Man', image: 'https://upload.wikimedia.org/wikipedia/en/5/59/The_Gray_Man_poster.png', theme: 'action', isGood: true},
+  {id: 2, title: 'Hoodwinked', image: 'https://upload.wikimedia.org/wikipedia/en/2/24/Hoodwinked.jpg', theme: 'comedy', isGood: true},
+  {id: 3, title: 'Point Break', image: 'https://upload.wikimedia.org/wikipedia/en/7/7e/Pointbreaktheatrical.jpg', theme: 'action', isGood: false},
 ];
 
-function ZineRack() {
-  const listZines = magazines.map(zine => 
+function MovieShelf() {
+  const listMovies = recentMovies.map(movie => 
     <li
-      key={zine.id}
+      key={movie.id}
       style={{
-        color: zine.isAvailable ? 'green' : 'red',
+        color: movie.isGood ? 'green' : 'red',
       }}
       >
-        {zine.title}
+        {movie.title}
+        <img 
+          className="moviePoster"
+          src={movie.image}
+          alt={movie.title + ' poster'}
+          width="100px"
+          height="100%"
+        />
       </li>
   );
   return (
-    <ul>{listZines}</ul>
+    <ul>{listMovies}</ul>
   )
 }
 
-const book = {
-  title: 'The Great Gatsby',
-  author: 'F. Scott Fitzgerald',
-  year: '1925',
-  image: 'https://upload.wikimedia.org/wikipedia/en/f/f7/TheGreatGatsby_1925jacket.jpeg',
-  width: '264',
-  height: '400'
-};
+const books = [
+  {
+    id: 1,
+    title: 'Harry Potter',
+    author: 'J.K. Rowling',
+    year: '1997',
+    isGood: true,
+  },
+  {
+    id: 2,
+    title: 'The Familiar',
+    author: 'Leigh Bardugo',
+    year: '2024',
+    isGood: false,   
+  },
+  {
+    id: 3,
+    title: 'Game of Thrones',
+    author: 'George R.R. Martin',
+    year: '1996',
+    isGood: true,
+  }
+];
 
 function BookShelf() {
-  return (
-    <div>
-      <h2>{book.title} ({book.year})</h2>
+  const listBooks = books.map(book =>
+    <div key={book.id}>
+      <h3>{book.title} {book.year}</h3>
       <p>by {book.author}</p>
-        <img 
-          className="bookCover"
-          src={book.image} 
-          alt={book.title + ' cover'}
-          style={{
-            width: book.width,
-            height: book.height
-          }} />
     </div>
   );
+  return (
+    <div>{listBooks}</div>
+  )
 }
 
-function MagicButton() {
+function GenreFilter() {
   return (
-    <>
-      <h3>This is a magic button.</h3>
-      <button>Magic</button>
-    </>
+    <div>
+      <h3>Filter by Genre</h3>
+      <button>Action</button>
+      <button>Comedy</button>
+    </div>
   );
 }
 
@@ -65,9 +83,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <MagicButton />
-      <BookShelf />
-      <ZineRack />
+        <h1>My Entertainment Library</h1>
+        <GenreFilter />
+        <h2>Movies</h2>
+        <MovieShelf />
+        <h2>Books</h2>
+        <BookShelf />
       </header>
     </div>
   );
