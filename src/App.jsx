@@ -67,6 +67,7 @@ function App() {
       <header className="App-header">
       <MagicButton />
       <BookShelf />
+      <ZineRack />
       </header>
     </div>
   );
